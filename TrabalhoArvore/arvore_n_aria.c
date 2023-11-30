@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Protótipos das funções privadas
-void profundidade( NoArvore *n ); // similar ao percurso em pré-ordem.
-void profundidade_xml( NoArvore *n, int nivel );
+// Protï¿½tipos das funï¿½ï¿½es privadas
+void profundidade( NoArvore *n ); // similar ao percurso em prï¿½-ordem.
+void profundidade_xml( NoArvore *n, int nivel , int deslocamento);
 NoArvore *aloca_no( int info );
 NoArvore *busca_no( NoArvore *n, int chave );
 void desaloca_pos_ordem( NoArvore *n );
@@ -17,7 +17,7 @@ void inicializa_Arvore( Arvore *p, int valor_raiz ){
 int insere_filho( Arvore a, int pai, int filho ){
     NoArvore *no_pai = busca_no( a.raiz , pai );
     if( no_pai == NULL)
-        return 0; // Erro: pai não foi encontrado!
+        return 0; // Erro: pai nï¿½o foi encontrado!
     
     if( no_pai->filho == NULL )
         no_pai->filho = aloca_no( filho );
@@ -70,35 +70,35 @@ void profundidade( NoArvore *n ){
 	}
 }
 
-void gera_xml( Arvore a ){
+void gera_xml( Arvore a , int deslocamento){
 	if( a.raiz == NULL)
 		printf("<Arvore-vazia>\n");
 	else{
-		profundidade_xml( a.raiz, 0);
+		profundidade_xml( a.raiz, 0, deslocamento);
 	}
 	printf("\n");
 }
 
-void profundidade_xml( NoArvore *n, int nivel ){
+void profundidade_xml( NoArvore *n, int nivel, int deslocamento ){
     int i;
 
     for( i = 0 ; i < nivel ; i++ )
         printf("  ");
     
     if( n->filho == NULL )
-        printf("<%d/>\n", n->info );
+        printf("<%d/>\n", n->info + deslocamento);
     else{
-        printf("<%d>\n", n->info );
+        printf("<%d>\n", n->info + deslocamento);
         
-	    profundidade_xml( n->filho, nivel + 1 );
+	    profundidade_xml( n->filho, nivel + 1 , deslocamento);
         
         for( i = 0 ; i < nivel ; i++ )
  			printf("  ");
-     	printf("</%d>\n", n->info );
+     	printf("</%d>\n", n->info + deslocamento);
     }
     
     if( n->irmao != NULL )
-        profundidade_xml( n->irmao, nivel );
+        profundidade_xml( n->irmao, nivel , deslocamento);
 }
 
 void desaloca_arvore( Arvore *p ){

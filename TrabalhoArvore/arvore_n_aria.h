@@ -10,17 +10,17 @@ typedef struct{
 void inicializa_Arvore( Arvore *p, int valor_raiz );
 int insere_filho( Arvore a, int pai, int filho );
 void percurso_profundidade( Arvore a );
-void gera_xml( Arvore a );
+void gera_xml( Arvore a , int deslocamento);
 void desaloca_arvore( Arvore *p );
 
 /*
-  Versão 1.0
+  Versï¿½o 1.0
   
   To do List:
   - Percurso em profundidade;
-  - Remoção;
+  - Remoï¿½ï¿½o;
   - Tratamento de valores repetidos:
-    - Inserção (?);
-    - Busca retornando uma lista de nós;
+    - Inserï¿½ï¿½o (?);
+    - Busca retornando uma lista de nï¿½s;
 
 */
